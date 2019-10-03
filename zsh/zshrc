@@ -108,7 +108,13 @@ export SPARK_LOCAL_IP=127.0.0.1
 export PATH=$PATH:/usr/local/spark/bin
 
 export HADOOP_HOME=/usr/local/hadoop
+# export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export SPARK_HOME=/usr/local/spark
+export AMBARI_CONF_DIR=/usr/local/hadoop/etc/docker_ambari_cluster_conf
+export HADOOP_CONF_DIR=$AMBARI_CONF_DIR/full_client_conf
+
+#export HIVE_CONF_DIR=$AMBARI_CONF_DIR/HIVE_CLIENT
+#export YARN_CONF_DIR=$AMBARI_CONF_DIR/YARN_CLIENT
 
 
 export PATH=$PATH:$HADOOP_HOME/bin
@@ -129,3 +135,11 @@ alias gre=grep -En
 
 export IMPALA_HOME=/home/quentin/apache-impala-3.0.1
 
+export CLASSPATH=/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH
+alias antlr4='java -Xmx500M -cp /usr/local/lib/antlr-4.7.1-complete.jar: org.antlr.v4.Tool'
+alias grun='java org.antlr.v4.gui.TestRig'
+
+bindkey -e
+
+bindkey -v
+bindkey '^R' history-incremental-search-backward

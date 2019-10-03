@@ -73,8 +73,12 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 sudo apt install build-essential cmake python3-dev
 
+# YCM compilation
 cd ~/.vim/bundle/YouCompleteMe
 python3 install.py --clang-completer
+
+# Grip markdown
+pip install grip
 
 #==============
 # Select which conky to symlink

@@ -124,6 +124,7 @@ export SPARK_LOCAL_IP=127.0.0.1
 export PATH=$PATH:/usr/local/spark/bin
 
 export HADOOP_HOME=/usr/local/hadoop
+export HADOOP_CONF_DIR=/usr/local/hadoop/etc/ambari_cluster_conf
 export PATH=$PATH:$HADOOP_HOME/bin
 
 
@@ -133,4 +134,19 @@ function tsv2nl {
 
 function csv2nl {
     sed 's/,/\n/g' $1 | awk ' BEGIN { cc = 0 } { cc += 1; printf("%2d: %s\n", cc, $0) } '
+}
+PATH="$PATH:/home/quentin/.conscript/bin"
+PATH="$PATH:/home/quentin/.conscript/bin"
+export openapi_generator_cli="java -jar /home/quentin/Desktop/AMS_code/5g/openapitools/openapi-generator-cli-4.1.x.jar"
+
+alias ssh9="ssh -p 999 -o ServerAliveInterval=60"
+
+# To record screen in mkv format
+alias ffmpscreenc="ffmpeg -f x11grab  -s 1920x1080 -i :0.0 -r 15 -vcodec libx264"
+
+
+ssh_tunnel () {
+    port=$1
+    user_and_host=$2
+    ssh -N -f -L localhost:$port:localhost:$port $user_and_host
 }

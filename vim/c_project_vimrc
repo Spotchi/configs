@@ -1,0 +1,22 @@
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+
+set colorcolumn=110
+highlight ColorColumn ctermbg=darkgray
+
+" Enable Doxygen Highlighting
+augroup project
+    autocmd!
+    autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
+augroup END
+
+" For <C-W><C-F> opening of file in new tab, where to look
+let &path.="src/include,/usr/include/AL,"
+" For Java (use of .)
+set includeexpr=substitute(v:fname,'\\.','/','g')
+
+" Vim make
+set makeprg=make\ -C\ ../build\ -j9
+
