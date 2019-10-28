@@ -52,7 +52,7 @@ ln -sf $dotfiles_dir/zsh/zshrc ~/.zshrc
 if [ -n "$(find $dotfiles_dir/custom-configs -name tmux.conf)" ]; then
     ln -s $dotfiles_dir/custom-configs/**/tmux.conf ~/.tmux.conf
 else
-    ln -s $dotfiles_dir/linux-tmux/tmux.conf ~/.tmux.conf
+    ln -s $dotfiles_dir/tmux/tmux.conf ~/.tmux.conf
 fi
 
 #if [ -n "$(find $dotfiles_dir/custom-configs -name tigrc)" ]; then

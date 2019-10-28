@@ -150,3 +150,6 @@ ssh_tunnel () {
     user_and_host=$2
     ssh -N -f -L localhost:$port:localhost:$port $user_and_host
 }
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
