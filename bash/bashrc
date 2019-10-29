@@ -150,3 +150,6 @@ ssh_tunnel () {
     user_and_host=$2
     ssh -N -f -L localhost:$port:localhost:$port $user_and_host
 }
+
+# Use most as man pager
+export PAGER="most"

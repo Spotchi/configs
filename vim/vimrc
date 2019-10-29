@@ -27,7 +27,6 @@ let vim_markdown_preview_github=1
 let g:vim_markdown_math=1
 let conceallevel=2
 
-
 " Generic auto-complete
 Plugin 'Valloric/YouCompleteMe'
 
@@ -128,8 +127,19 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Map C-t right and left to switching buffer
+" TODO : makes sense to use h and l for that? this command is a bit awkward
 map <C-t><right> :bnext<cr>
 map <C-t><left> :bprevious<cr>
+
+
+" Mapping <leader>ew to :e relative path
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
+
 "
 " Copy pasting : use system clipboard for vim
 set clipboard=unnamedplus
