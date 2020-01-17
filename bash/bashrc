@@ -115,7 +115,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/quentin/anaconda3/bin:/home/quentin/anaconda3/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/quentin/miniconda3/bin
 
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 export PYSPARK_PYTHON=/home/quentin/anaconda3/envs/sigil36/bin/python
@@ -153,3 +153,19 @@ ssh_tunnel () {
 
 # Use most as man pager
 export PAGER="most"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/qlaurent/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/qlaurent/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/qlaurent/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/qlaurent/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+setxkbmap -option caps:escape
