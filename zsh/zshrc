@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/quentin/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,8 +69,10 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Set vi keybindings (remove emacs mode and duplicates below)
 bindkey -v
 export KEYTIMEOUT=1
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,47 +101,46 @@ export KEYTIMEOUT=1
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/quentin/anaconda3/bin:/home/quentin/anaconda3/bin
+# Add important directories to PATH, preserving existing PATH
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/anaconda3/bin"
 
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-export PYSPARK_PYTHON=/home/quentin/anaconda3/envs/sigil36/bin/python
+export PYSPARK_PYTHON="$HOME/anaconda3/envs/sigil36/bin/python"
 export SPARK_LOCAL_IP=127.0.0.1
 
-export PATH=$PATH:/usr/local/spark/bin
-
-export HADOOP_HOME=/usr/local/hadoop
-# export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export SPARK_HOME=/usr/local/spark
+export HADOOP_HOME=/usr/local/hadoop
 export AMBARI_CONF_DIR=/usr/local/hadoop/etc/docker_ambari_cluster_conf
 export HADOOP_CONF_DIR=$AMBARI_CONF_DIR/full_client_conf
 
-#export HIVE_CONF_DIR=$AMBARI_CONF_DIR/HIVE_CLIENT
-#export YARN_CONF_DIR=$AMBARI_CONF_DIR/YARN_CLIENT
+export PATH="$PATH:$SPARK_HOME/bin:$HADOOP_HOME/bin"
 
-
-export PATH=$PATH:$HADOOP_HOME/bin
-
-
-function tsv2nl {
-    sed 's/\t/\n/g' $1 | awk ' BEGIN { cc = 0 } { cc += 1; printf("%2d: %s\n", cc, $0) } '
+# Custom functions
+tsv2nl() {
+    sed 's/\t/\n/g' "$1" | awk ' BEGIN { cc = 0 } { cc += 1; printf("%2d: %s\n", cc, $0) } '
 }
 
-function csv2nl {
-    sed 's/,/\n/g' $1 | awk ' BEGIN { cc = 0 } { cc += 1; printf("%2d: %s\n", cc, $0) } '
+csv2nl() {
+    sed 's/,/\n/g' "$1" | awk ' BEGIN { cc = 0 } { cc += 1; printf("%2d: %s\n", cc, $0) } '
 }
 
+# Aliases
 alias t=todo.sh
-export NOTES_DIR=/home/quentin/Desktop/notes
-
-alias gre=grep -En
-
-export IMPALA_HOME=/home/quentin/apache-impala-3.0.1
-
-export CLASSPATH=/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH
+alias gre='grep -En'
 alias antlr4='java -Xmx500M -cp /usr/local/lib/antlr-4.7.1-complete.jar: org.antlr.v4.Tool'
 alias grun='java org.antlr.v4.gui.TestRig'
 
-bindkey -e
+# Notes and tools
+export NOTES_DIR="$HOME/Desktop/notes"
+export IMPALA_HOME="$HOME/apache-impala-3.0.1"
 
-bindkey -v
+# CLASSPATH
+export CLASSPATH="/usr/local/lib/antlr-4.7.1-complete.jar${CLASSPATH:+:$CLASSPATH}"
+
+# Keybindings
 bindkey '^R' history-incremental-search-backward
+
+# Fallback system-agnostic prompt if theme is not set
+if [[ -z "$ZSH_THEME" || "$ZSH_THEME" == "none" ]]; then
+  PS1="%n@%m %1~ %# "
+fi
